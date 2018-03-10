@@ -17,7 +17,22 @@ void TestDemo::operationFinished(uint8_t id, uint8_t type)
     switch (type)
     {
     case MotorsController::Recognize_Finished:
-        contorllerInst->launchAllMotors();
+    {
+        vector<uint8_t> idArray = contorllerInst->getMotorIdArray();
+        for(int i=0;i<idArray.size();++i)
+        {
+            if(contorllerInst->getMotorAttribute(idArray.at(i),MotorData::MOTOR_SWITCH)
+                    != UserDefine::MOTOR_SWITCH_ON)
+            {
+                contorllerInst->launchMotor(idArray.at(i));
+            }
+            else
+            {
+                m_bHasLaunched = true;
+            }
+        }
+    }
+
         break;
     case MotorsController::Launch_Finished:
     {

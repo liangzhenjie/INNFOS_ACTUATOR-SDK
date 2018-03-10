@@ -272,6 +272,20 @@ private:
     vector<uint8_t> convertQListToVector(const QList<quint8> &qList)const;
     QList<quint8> convertVectorToQList(const vector<uint8_t> &cVector)const;
 private:
+
+    class GC{
+    public:
+        ~GC()
+        {
+            if(m_pInstance!=nullptr)
+            {
+                delete m_pInstance;
+                m_pInstance = nullptr;
+            }
+        }
+        static GC gc;
+    };
+private:
     int m_nLaunchMotorsCnt;
 public:
     //signals
@@ -297,7 +311,7 @@ public:
      */
     CSignal<> m_sNewChartStart;
     /**
-     * @brief m_sChartValueChange 图显数据信号
+     * @brief m_sChartValueChange 图显数据
      */
     CSignal<uint8_t,double> m_sChartValueChange;
 private:
