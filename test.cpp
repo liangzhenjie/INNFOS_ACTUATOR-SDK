@@ -6,6 +6,11 @@
 
 TestDemo::TestDemo() : m_bHasLaunched(false)
 {
+    //假设执行器的物理限制是33A，6000r/min,其id为1
+    contorllerInst->setMotorAttribute(1,MotorData::VEL_MINIMAL,-0.5);//限制电机在速度环和位置环的反向电流最大为16.5A
+    contorllerInst->setMotorAttribute(1,MotorData::VEL_MAXIMUM,0.5);//限制电机在速度环和位置环的正向电流最大为16.5A
+    contorllerInst->setMotorAttribute(1,MotorData::POS_MINIMAL,-0.5);//限制电机在位置环的反向最大速度为3000r/min
+    contorllerInst->setMotorAttribute(1,MotorData::POS_MAXIMUM,0.5);//限制电机在位置环的正向最大速度为3000r/min
 }
 
 TestDemo::~TestDemo()
@@ -107,13 +112,13 @@ void TestDemo::motorAttrChanged(uint8_t id, uint8_t attrId, double value)
     switch (attrId)
     {
     case MotorData::CUR_ACTURAL:
-        cout << "motor " << id << " current:" << value << endl;
+        cout << "motor " << (int)id << " current:" << value << endl;
         break;
     case MotorData::VEL_ACTURAL:
-        cout << "motor " << id << " velocity:" << value <<endl;
+        cout << "motor " << (int)id << " velocity:" << value <<endl;
         break;
     case MotorData::POS_ACTURAL:
-        cout << "motor " << id << " position:" << value <<endl;
+        cout << "motor " << (int)id << " position:" << value <<endl;
         break;
     default:
         break;
