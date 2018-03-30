@@ -13,6 +13,7 @@ add_compile_options(-pthread)
 
 add_executable(MyTest main.cpp test.cpp)
 
-target_link_libraries(motorsControll
- MyTest
+target_link_libraries(MyTest
+motorsControll
+pthread
  )
