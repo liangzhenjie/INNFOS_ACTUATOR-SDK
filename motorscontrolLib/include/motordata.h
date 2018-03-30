@@ -94,6 +94,10 @@ public:
         MAC_ID,//执行器SN号
         MODE_ID,//执行器当前模式
         ERROR_ID,//错误代码
+        RESERVE_0,
+        RESERVE_1,
+        RESERVE_2,
+        RESERVE_3,
         DATA_CNT,
         DATA_CHART,//预留
         DATA_INVALID,
@@ -208,6 +212,7 @@ public:
     void reconnect(quint8 nDeviceId);
     void clearError(quint8 nDeviceId);
     void sendCmd(quint8 nDeviceId,quint16 cmdId);
+    void sendCmd(quint8 nDeviceId,quint16 cmdId,quint8 value);
 private:
     MotorDataMgr();
 signals:
