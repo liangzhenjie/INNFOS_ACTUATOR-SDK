@@ -18,13 +18,13 @@ void TestDemo::operationFinished(uint8_t id, uint8_t type)
     {
     case MotorsController::Recognize_Finished:
     {
-        vector<uint8_t> idArray = contorllerInst->getMotorIdArray();
+        vector<uint8_t> idArray = controllerInst->getMotorIdArray();
         for(int i=0;i<idArray.size();++i)
         {
-            if(contorllerInst->getMotorAttribute(idArray.at(i),MotorData::MOTOR_SWITCH)
+            if(controllerInst->getMotorAttribute(idArray.at(i),MotorData::MOTOR_SWITCH)
                     != UserDefine::MOTOR_SWITCH_ON)
             {
-                contorllerInst->launchMotor(idArray.at(i));
+                controllerInst->launchMotor(idArray.at(i));
             }
             else
             {
@@ -39,7 +39,7 @@ void TestDemo::operationFinished(uint8_t id, uint8_t type)
         m_bHasLaunched = true;
         // vector<uint8_t> idArray;
         // idArray.push_back(id);
-        // contorllerInst->activeMotorsMode(idArray, MotorData::Mode_Profile_Pos);
+        // controllerInst->activeMotorsMode(idArray, MotorData::Mode_Profile_Pos);
     }
     break;
     default:
@@ -51,31 +51,31 @@ void TestDemo::cmdOperation(uint8_t directive, double value)
 {
     if (!m_bHasLaunched)
         return;
-    vector<uint8_t> idArray = contorllerInst->getMotorIdArray();
+    vector<uint8_t> idArray = controllerInst->getMotorIdArray();
     switch (directive)
     {
     case 'a':
-        contorllerInst->activeMotorsMode(idArray, MotorData::Motor_Mode(value));
+        controllerInst->activeMotorsMode(idArray, MotorData::Motor_Mode(value));
         break;
     case 's':
-        contorllerInst->closeAllMotors();
+        controllerInst->closeAllMotors();
         break;
     case 'p':
         for (int i = 0; i < idArray.size(); ++i)
         {
-            contorllerInst->setPosition(idArray.at(i), value);
+            controllerInst->setPosition(idArray.at(i), value);
         }
         break;
     case 'c':
         for (int i = 0; i < idArray.size(); ++i)
         {
-            contorllerInst->setCurrent(idArray.at(i), value);
+            controllerInst->setCurrent(idArray.at(i), value);
         }
         break;
     case 'v':
         for (int i = 0; i < idArray.size(); ++i)
         {
-            contorllerInst->setVelocity(idArray.at(i), value);
+            controllerInst->setVelocity(idArray.at(i), value);
         }
         break;
     case 'r':
@@ -93,7 +93,7 @@ void TestDemo::cmdOperation(uint8_t directive, double value)
 
             for (int i = 0; i < idArray.size(); ++i)
             {
-                contorllerInst->regainAttrbute(idArray.at(i), dataId);
+                controllerInst->regainAttrbute(idArray.at(i), dataId);
             }
         }
         break;
