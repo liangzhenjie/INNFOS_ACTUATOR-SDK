@@ -25,6 +25,8 @@ void TestDemo::operationFinished(uint8_t id, uint8_t type)
                     != UserDefine::MOTOR_SWITCH_ON)
             {
                 controllerInst->launchMotor(idArray.at(i));
+				//controllerInst->switchAutoRefresh(idArray.at(i),true);
+				//controllerInst->setAutoRefreshInterval(idArray.at(i),1000);
             }
             else
             {
